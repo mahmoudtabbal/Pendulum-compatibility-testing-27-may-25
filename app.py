@@ -37,10 +37,15 @@ name = st.text_input("Full Name")
 dob = st.date_input("Date of Birth", min_value=datetime.date(1900, 1, 1), max_value=datetime.date.today(), key="dob_input")
 intention = st.text_input("Intention (e.g., emotional balance, focus)")
 
-item_input = st.text_input("Single Item to Test")
+col1, col2 = st.columns(2)
+item_input = col1.text_input("Single Item to Test")
+item_category = col2.text_input("Category (optional)")
 uploaded_file = st.file_uploader("Or upload a file with items (one item per line)", type=["txt", "csv"])
 
-results = []
+if 'results' not in st.session_state:
+    st.session_state['results'] = []
+
+results = st.session_state['results']
 
 if st.button("Run Dowsing"):
     if not name or not intention:
@@ -55,9 +60,14 @@ if st.button("Run Dowsing"):
         for item in items:
             val = calculate_resonance(name, dob, intention, item)
             level = interpret_resonance(val)
-            results.append({"Item": item, "Resonance Value": val, "Compatibility Level": level})
+results.append({
+    "Item": item,
+    "Category": item_category if item_category else "Uncategorized",
+    "Resonance Value": val,
+    "Compatibility Level": level
+})
 
-        df = pd.DataFrame(results)
+        df = pd.DataFrame(st.session_state["results"])
         st.dataframe(df)
 
         # Export options
