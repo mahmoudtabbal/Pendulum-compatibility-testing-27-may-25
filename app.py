@@ -3,7 +3,8 @@ import streamlit as st
 import hashlib
 import pandas as pd
 import io
-
+import datetime
+dob = st.date_input("Date of Birth", min_value=datetime.date(1900, 1, 1), max_value=datetime.date.today())
 # Dowsing algorithm
 def calculate_resonance(name, dob, intention, item):
     signature = f"{name}|{dob}|{intention}|{item}"
@@ -33,7 +34,7 @@ def interpret_resonance(value):
 st.title("Energetic Compatibility Dowser")
 
 name = st.text_input("Full Name")
-dob = st.date_input("Date of Birth")
+dob = st.date_input("Date of Birth", min_value=datetime.date(1900, 1, 1), max_value=datetime.date.today())
 intention = st.text_input("Intention (e.g., emotional balance, focus)")
 
 item_input = st.text_input("Single Item to Test")
