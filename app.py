@@ -60,12 +60,7 @@ if st.button("Run Dowsing"):
         for item in items:
             val = calculate_resonance(name, dob, intention, item)
             level = interpret_resonance(val)
-results.append({
-    "Item": item,
-    "Category": item_category if item_category else "Uncategorized",
-    "Resonance Value": val,
-    "Compatibility Level": level
-})
+            results.append({ "Item": item,  "Category": item_category if item_category else "Uncategorized",  "Resonance Value": val,  "Compatibility Level": level})
 
         df = pd.DataFrame(st.session_state["results"])
         st.dataframe(df)
