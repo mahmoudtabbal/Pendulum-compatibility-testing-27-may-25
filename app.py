@@ -34,7 +34,7 @@ def interpret_resonance(value):
 st.title("Energetic Compatibility Dowser")
 
 name = st.text_input("Full Name")
-dob = st.date_input("Date of Birth", min_value=datetime.date(1900, 1, 1), max_value=datetime.date.today())
+dob = st.date_input("Date of Birth", min_value=datetime.date(1900, 1, 1), max_value=datetime.date.today(), key="dob_input")
 intention = st.text_input("Intention (e.g., emotional balance, focus)")
 
 item_input = st.text_input("Single Item to Test")
